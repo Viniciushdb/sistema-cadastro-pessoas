@@ -6,6 +6,13 @@
 .vscode/
 *.iml
 
-# Arquivos do sistema operacional
+# Arquivos do sistema
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+*.tmp
+*.temp 

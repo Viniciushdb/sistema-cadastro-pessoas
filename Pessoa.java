@@ -1,15 +1,15 @@
 public class Pessoa {
     private String nome;
     private String sobrenome;
-    private int idade;
+    private Data dataNascimento;
     private double altura;
     private double peso;
     private double imc;
 
-    public Pessoa(String nome, String sobrenome, int idade, double altura, double peso) {
+    public Pessoa(String nome, String sobrenome, Data dataNascimento, double altura, double peso) {
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
         this.altura = altura;
         this.peso = peso;
     }
@@ -22,8 +22,8 @@ public class Pessoa {
         return sobrenome;
     }
 
-    public int getIdade() {
-        return idade;
+    public Data getDataNascimento() {
+        return dataNascimento;
     }
 
     public double getAltura() {
@@ -46,8 +46,8 @@ public class Pessoa {
         this.sobrenome = sobrenome;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Data dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public void setAltura(double altura) {
@@ -60,6 +60,22 @@ public class Pessoa {
 
     public void CalculaIMC() {
         this.imc = this.peso / (this.altura * this.altura);
+    }
+
+    public int calculaIdade() {
+        java.util.Calendar hoje = java.util.Calendar.getInstance();
+        int anoAtual = hoje.get(java.util.Calendar.YEAR);
+        int mesAtual = hoje.get(java.util.Calendar.MONTH) + 1;
+        int diaAtual = hoje.get(java.util.Calendar.DAY_OF_MONTH);
+
+        int idade = anoAtual - dataNascimento.getAno();
+
+        if (mesAtual < dataNascimento.getMes() || 
+            (mesAtual == dataNascimento.getMes() && diaAtual < dataNascimento.getDia())) {
+            idade--;
+        }
+
+        return idade;
     }
 
     public String InformaObesidade() {
@@ -76,5 +92,13 @@ public class Pessoa {
         } else {
             return "Obesidade grau 3";
         }
+    }
+
+    public String getNomeCompleto() {
+        return nome + " " + sobrenome;
+    }
+
+    public String getNomeReferencia() {
+        return sobrenome + ", " + nome.toUpperCase();
     }
 } 
